@@ -1,8 +1,8 @@
-package citweek6;
 import java.util.Scanner;
 
 
 //@Author Yulian
+//This project will ask a series of questions, from a menu before giving a final output based on the data gathered
 
 public class MysteryDoors {
 	@SuppressWarnings("resource")
@@ -21,14 +21,19 @@ public class MysteryDoors {
 	static boolean staticDynamic;
 	static boolean mindBody;
 	
+	static boolean mill = false;
+	static boolean parmenides = false;
+	static boolean aristotle = false;
+	static boolean epicurus = false;
+	
 	
 	//The main method, includes an introduction and a looping questions menu 
 	public static void main(String[] args) {
 		int selection;
 		
 		System.out.println("Hello, I read alot of books and can offer you an interesting reading recommendation if you would like to answer a few questions.");
-		System.out.println("Simply choose a topic and answer true or false. When you're done with each section please continue to the next section, or repeat a section if you'd like."
-				+ " When you've answered all you want simply request the results and you'll recieve a book recommendation.");
+		System.out.println("Simply choose a topic and answer true or false. When you're done with each section please continue to the next section, or repeat a section if you'd like.");
+		System.out.println("When you've answered all you want simply request the results and you'll recieve a book recommendation.");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println("1. Ethics");
 		System.out.println("2. Aesthetics");
@@ -114,25 +119,42 @@ public class MysteryDoors {
 		
 	}//closes the metamemes methods
 	
+	
+	//series of methods to compress the logic for final book recommendations
+	public static boolean recommendMill(){
+		if (endsMeans == true && artGenre == true && effortResults == false) {
+			mill = true;
+		} return mill;
+	}
+
+	public static boolean recommendPar() {
+		if (causeEffect == false && mindBody == false) {
+			parmenides = true;
+		} return parmenides;
+	}
+	
+	public static boolean recommendArist() {
+		if (causeEffect == true && beautiful == true) {
+			aristotle = true;
+		} return aristotle;
+	}
+	
+	public static boolean reccomendEpicurus() {
+		 if (pleasurePain == true) {
+			epicurus = true;
+		 } return epicurus;
+	}
+		
+		
+		
 	//final recommendation method, draws input data that is stored in the class to change recommendations
 	public static void results() {
 		
-		//declaring recommendation variables, starts at false
-		boolean mill = false;
-		boolean parmenides = false;
-		boolean aristotle = false;
-		boolean epicurious = false;
-		
 		//drawing variables stored in the class to adjust the recommendation variables
-		if (endsMeans == true && artGenre == true && effortResults == false) {
-			mill = true;
-		} if (causeEffect == false && mindBody == false) {
-			parmenides = true;
-		} if (causeEffect == true && beautiful == true) {
-			aristotle = true;
-		} if (pleasurePain == true) {
-			epicurious = true;
-		}
+		recommendMill();
+		recommendPar();
+		recommendArist();
+		reccomendEpicurus();
 		
 		//the final result, different outputs depending on which recommendation variables are altered
 		System.out.println("Here is a book I think you'd really like:");
@@ -142,11 +164,11 @@ public class MysteryDoors {
 			System.out.println("On Nature by Parmenides");
 		}if (aristotle == true) {
 			System.out.println("Nicomachean Ethics by Aristotle");
-		}if (epicurious == true){
+		}if (epicurus == true) {
 			System.out.println("The Complete works of Epicurus by Epicurus, collected by Anthony Martinez");
 		} else {
 			System.out.println("Harry Potter by J.K. Rowling");
 		}
 		
-	} //closes recoommendation method
+	} //closes recommendation method
 	}// closes class
