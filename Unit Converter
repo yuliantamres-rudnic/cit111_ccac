@@ -1,0 +1,69 @@
+import java.util.Scanner;
+
+public class UnitConverter {
+	static Scanner keyboardScanner = new Scanner(System.in);
+	
+	@SuppressWarnings("unused")
+	public static void main(String args) {
+		int unitSelection;
+		
+		//The main method produces a looping menu that gives options for unit conversions
+		System.out.println("Hello, this is a handy little took for quick cooking unit conversions");
+		System.out.println("Please choose which type of measurement you would like to convert.");
+		System.out.println("_____________________________________________________________________");
+		System.out.println("1. Fluid Ounces to Cups ");
+		System.out.println("2. Tablespoons to Cups");
+		System.out.println("3. Cups to Galloons");
+		
+		choices: while(true) {
+			unitSelection = keyboardScanner.nextInt();
+			
+			switch(unitSelection) {
+			case 1:
+				ounceCups(unitSelection);
+				System.out.println("1. Fluid Ounces to Cups ");
+				System.out.println("2. Tablespoons to Cups");
+				System.out.println("3. Cups to Galloons");
+			case 2:	
+				tblCup(unitSelection);
+				System.out.println("1. Fluid Ounces to Cups ");
+				System.out.println("2. Tablespoons to Cups");
+				System.out.println("3. Cups to Galloons");
+			case 3:
+				cupGal(unitSelection);
+				System.out.println("1. Fluid Ounces to Cups ");
+				System.out.println("2. Tablespoons to Cups");
+				System.out.println("3. Cups to Galloons");
+			}//closes switch function
+		}//closes choices menu
+	}//closes main
+
+	//method to convert ounces to cups
+	public static double ounceCups(double oz) {
+		final double OZCUP = 8;
+		
+		System.out.println("You've choosen to convert ounces(oz) to cups, please enter your ounce amount");
+		oz = keyboardScanner.nextDouble();
+		double cups = oz * OZCUP;
+		return cups;
+	}//closes ounceCups
+	
+	//method to convert tablespoons to cups
+	public static double tblCup (double tbl) {
+		final double TBLCUP = 16;
+		
+		System.out.println("You've chosen to convert tablespoons(tbs) to cups, please enter your tablespoon amount");
+		tbl = keyboardScanner.nextDouble();
+		double cups = tbl * TBLCUP;
+		return cups;
+	}//closes tblCup
+	
+	//method to convert cups to gallons
+	public static double cupGal (double cup) {
+		final double CUPGALL = 16;
+		
+		System.out.println("You've chosen to convert cups(cup) to gallons, please enter your cup amount");
+		double gal = cup * CUPGALL;
+		return gal;
+	}//closes cupGal
+}//closes class
