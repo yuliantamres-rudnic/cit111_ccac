@@ -20,17 +20,23 @@ public class UnitConverter {
 			
 			switch(unitSelection) {
 			case 1:
-				ounceCups(unitSelection);
+				ounceCups();
+				System.out.println("You have" + ozcups + "oz/cups");
+				
 				System.out.println("1. Fluid Ounces to Cups ");
 				System.out.println("2. Tablespoons to Cups");
 				System.out.println("3. Cups to Galloons");
 			case 2:	
-				tblCup(unitSelection);
+				tblCup();
+				System.out.println("You have" + tblcups + "tbl/cups");
+				
 				System.out.println("1. Fluid Ounces to Cups ");
 				System.out.println("2. Tablespoons to Cups");
 				System.out.println("3. Cups to Galloons");
 			case 3:
-				cupGal(unitSelection);
+				cupGal();
+				System.out.println("You have" + cupgals + "cups/gals");
+				
 				System.out.println("1. Fluid Ounces to Cups ");
 				System.out.println("2. Tablespoons to Cups");
 				System.out.println("3. Cups to Galloons");
@@ -39,31 +45,72 @@ public class UnitConverter {
 	}//closes main
 
 	//method to convert ounces to cups
-	public static double ounceCups(double oz) {
+	public static double ounceCups(double oz, double cup) {
 		final double OZCUP = 8;
+		String choice;
+		double ozcups = 0;
 		
-		System.out.println("You've choosen to convert ounces(oz) to cups, please enter your ounce amount");
-		oz = keyboardScanner.nextDouble();
-		double cups = oz * OZCUP;
-		return cups;
+		@SuppressWarnings("resource")
+		Scanner ozcupScanner = new Scanner(System.in);
+		
+		System.out.println("Please choose which unit you would like to convert, 'oz' or 'cup'");
+		choice = ozcupScanner.next();
+		
+		if (choice == "oz") {
+			System.out.println("You've choosen to convert ounces(oz) to cups, please enter your ounce amount");
+			oz = keyboardScanner.nextDouble();
+			ozcups = oz * OZCUP;
+		} if(choice == "cup"){
+			System.out.println("You've choosen to convert cups to ounces(oz), please enter your cup amount");
+			cup = keyboardScanner.nextDouble();
+			ozcups = cup / OZCUP;
+		}
+		return ozcups;
 	}//closes ounceCups
 	
 	//method to convert tablespoons to cups
-	public static double tblCup (double tbl) {
+	public static double tblCup (double tbl, double cups) {
 		final double TBLCUP = 16;
+		String choice;
+		double tblcups = 0;
 		
-		System.out.println("You've chosen to convert tablespoons(tbs) to cups, please enter your tablespoon amount");
-		tbl = keyboardScanner.nextDouble();
-		double cups = tbl * TBLCUP;
-		return cups;
+		Scanner tblcupScanner = new Scanner(System.in);
+		
+		System.out.println("Please choose which unit you would like to convert, 'tbl' or 'cup'");
+		choice = tblcupScanner.next();
+		
+		if (choice == "tbl") {
+			System.out.println("You've chosen to convert tablespoons(tbs) to cups, please enter your tablespoon amount");
+			tbl = keyboardScanner.nextDouble();
+			cups = tbl * TBLCUP;
+		} if (choice == "cup") {
+			System.out.println("You've chosen to convert cups(cups) to tablesppons (tbs), please enter your cup amount");
+			cups = keyboardScanner.nextDouble();
+			tbl = cups / TBLCUP;
+		}
+		return tblcups;
 	}//closes tblCup
 	
 	//method to convert cups to gallons
-	public static double cupGal (double cup) {
+	public static double cupGal (double cup, double gal) {
 		final double CUPGALL = 16;
+		String choice;
+		double cupgals = 0;
 		
-		System.out.println("You've chosen to convert cups(cup) to gallons, please enter your cup amount");
-		double gal = cup * CUPGALL;
-		return gal;
+		Scanner cupgalScanner = new Scanner (System.in);
+		
+		System.out.println("Please choose which unit you would like to convert, 'cup' or 'gal'");
+		choice = cupgalScanner.next();
+		
+		if (choice == "cup") {
+			System.out.println("You've chosen to convert cups(cup) to gallons(gal), please enter your cup amount");
+			cup = keyboardScanner.nextDouble();
+			cupgals = cup * CUPGALL;
+		} if (choice == "gal") {
+			System.out.println("You've chosen to convert gallons(gal) to cups(cup), please enter your cup amount");
+			gal = keyboardScanner.nextDouble();
+			cupgals = gal / CUPGALL;
+		}
+		return cupgals;
 	}//closes cupGal
 }//closes class
