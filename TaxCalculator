@@ -1,0 +1,111 @@
+import java.util.Scanner;
+
+
+public class TaxCalculator {
+	//declaring the tools and variables that will be needed, and access in several methods
+	static Scanner keyboardScanner = new Scanner(System.in);
+	static String state = "";
+	static String city = "" ; 
+	static double taxRate = 0.0;
+	static double localRate = 0.0;
+	static double taxableIncome = 0.0;
+	static double nonTaxable = 0.0;
+	static double fedTax = 0.0;
+	
+	public static void main(String[] args) throws InterruptedException {
+		//main method, simple runs all the subordinate methods
+		
+		intro();
+		inputModifiers();
+		personalIncome();
+		fedIncomeBracket();
+		Thread.sleep(1000);
+		System.out.println("Now calculating your tax burden this year...");
+		Thread.sleep(1000);
+		calculateIncomeTax(fedTax);
+		
+	}//closes main
+	
+	public static void intro() {
+		//short introduction, making it its own method keeps the main method clean
+		System.out.println("Hello, this is a simple tool to help predict your taxes.");
+		System.out.println("Please start by answering these question.");
+	}
+	
+	public static void inputModifiers() {
+		
+		//Declaring variables to be calculated out later
+		//If I had more time I would have liked to linked tax rates to specific string inputs
+		//But this became a lot of work because several states have marginal tax rates
+		
+		System.out.println("For record keeping, which state do you reside in.");
+		state = keyboardScanner.next();
+		System.out.println("And the Locality");
+		city = keyboardScanner.next();
+		System.out.println("Okay, now for the Tax Rate in your state");
+		taxRate = keyboardScanner.nextDouble();
+		System.out.println("and the local tax rate");
+		localRate = keyboardScanner.nextDouble();
+		return;
+	}//closes inputModifiers
+
+	public static void personalIncome() {
+		
+		//Enter your taxable and non taxable income, returns it to the class
+		//to be used in later methods
+		
+		System.out.println("Okay now it is time to put in your taxable incom for the year"
+				+ "this will include the money you've made from your work and such");
+		taxableIncome = keyboardScanner.nextDouble();
+		System.out.println("And to declare your non taxable income, this would include "
+				+ "things such as inheretence and tax refunds from the previous year");
+		nonTaxable = keyboardScanner.nextDouble();
+		return;
+		
+	}//closes personalIncome
+
+	public static void fedIncomeBracket(){
+		
+		//Quick calculation to see which marginal bracket you land in
+		//Cycles and replaces fedTax
+		if (taxableIncome <= 9875.00) {
+			fedTax = .10;
+		}if (taxableIncome > 9875.00) {
+			fedTax = .12;
+		}if (taxableIncome > 80251.00) {
+			fedTax = .22;
+		}if (taxableIncome > 171050.00) {
+			fedTax = .24;
+		}if (taxableIncome > 163301.00) {
+			fedTax = .32;
+		}if (taxableIncome > 207351.00) {
+			fedTax = .35;
+		}if (taxableIncome > 518401.00) {
+			fedTax = .37;
+		}//closes federal bracket if logic
+		return;
+	}//closes fedIncomeBracket
+
+	public static void calculateIncomeTax(double takeHome) throws InterruptedException {
+		//taking all the inputs and outputting them as usable information
+		//takeHome declared as a member variable because it is local to this method
+		//added thread sleeps and an outline to the final take home amount to make it more palatable 
+		takeHome = nonTaxable + taxableIncome - (taxableIncome*fedTax);
+		System.out.println("In the state of "+ state +" the tax rate is " + taxRate+"%");
+		Thread.sleep(1000);
+		System.out.println("Plus the local tax of "+localRate+"% in the city of " +city);
+		Thread.sleep(1000);
+		System.out.println("You paid $ "+taxableIncome*fedTax+" in federal taxes this year");
+		Thread.sleep(1000);
+		System.out.println("You paid $"+taxableIncome*(taxRate/100)+"in state taxes");
+		Thread.sleep(1000);
+		System.out.println("Plus $"+taxableIncome*(localRate/100)+"in local taxes");
+		Thread.sleep(1000);
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("You made ~$"+takeHome+"~ in Take Home Income this year");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		Thread.sleep(1000);
+		System.out.println("Thank you for using this program");
+	}//closes calculateIncomeTax
+	
+}//closes class
